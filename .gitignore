@@ -17,3 +17,9 @@ __pycache__/
 .idea/
 *.swp
 *.swo
+
+# Local caches and generated state
+.cache/
+skills-archive/
+*.local
+*.local.*

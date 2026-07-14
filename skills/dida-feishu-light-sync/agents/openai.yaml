@@ -1,0 +1,4 @@
+interface:
+  display_name: "滴答飞书轻量巡检"
+  short_description: "用低读取、低落盘方式检查滴答与飞书任务同步状态"
+  default_prompt: "Use $dida-feishu-light-sync to run a minimal Dida and Feishu task sync check."

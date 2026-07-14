@@ -1,0 +1,4 @@
+interface:
+  display_name: "尔玉分享工坊"
+  short_description: "把分享材料制作成尔玉风格 HTML 演示与 PDF"
+  default_prompt: "Use $eryu-share-studio to turn my material into an Eryu-style HTML presentation and PDF."

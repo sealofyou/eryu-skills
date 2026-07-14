@@ -1,0 +1,4 @@
+interface:
+  display_name: "尔玉动态网页发布"
+  short_description: "统一路由尔玉风格网页、演示稿、报告与打印输出"
+  default_prompt: "Use $eryu-dynamic-web-publisher to choose and produce the right Eryu-style web output."

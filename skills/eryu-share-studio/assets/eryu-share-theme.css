@@ -1,0 +1,28 @@
+:root {
+  --eryu-ink: #1d2023;
+  --eryu-carbon: #2a2d30;
+  --eryu-paper: #f4f1ea;
+  --eryu-white: #fbfbf8;
+  --eryu-mist: #dde1e0;
+  --eryu-cold-green: #2f9f8d;
+  --eryu-slate-blue: #9aaabd;
+  --eryu-note-yellow: #e7d9a7;
+  --eryu-soft-sage: #b7c4a9;
+  --eryu-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

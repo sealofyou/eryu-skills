@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub 知识库"
+  short_description: "跨机器查找、克隆、更新并维护本地 GitHub 仓库集合"
+  default_prompt: "Use $github-kb to find or manage a repository in my local GitHub knowledge base."
