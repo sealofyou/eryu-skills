@@ -67,6 +67,9 @@ export async function createHideMyEmailAliases({
     await globalThis.sky.click({ app, element_index: buttonIndex(readyTree, "继续") });
 
     const completeTree = await getTree(app);
+    if (completeTree.includes("电子邮件已达上限") || completeTree.includes("Email limit reached")) {
+      throw new Error("Hide My Email address limit reached. No alias was created.");
+    }
     if (!completeTree.includes("设置完成") && !completeTree.includes("Setup Complete")) {
       throw new Error(`Alias creation did not complete for ${label}.`);
     }

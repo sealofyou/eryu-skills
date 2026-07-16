@@ -55,6 +55,7 @@ lark-cli base +record-list \
 ## Recovery
 
 - If the script stops after creating some aliases, use its returned email list and the visible Apple labels to determine progress.
+- If System Settings says `电子邮件已达上限`, cancel the uncompleted form and stop the batch. No alias was created; this is an Apple account limit, not a UI retry condition.
 - Do not guess missing addresses. Reopen Hide My Email and inspect labels if needed.
 - If Feishu writeback fails after Apple aliases are created, rerun only the Feishu writeback with the returned email list.
 - If Computer Use cannot read System Settings, verify the Codex desktop accessibility authorization before retrying.
