@@ -43,6 +43,6 @@ The returned list is the source of truth for Feishu writeback. Each address is r
 ## Notes
 
 - The old Swift AX script remains only as a legacy diagnostic tool. Recent macOS System Settings panels accept the label value but can ignore its subsequent `继续` action when driven directly by AX; use the `.mjs` Computer Use path as the primary workflow.
-- If System Settings reports `电子邮件已达上限`, stop the batch after cancelling the uncompleted form and inspect the list total. The alert can be transient; a list showing `100 items` indicates the current Apple account has reached its total capacity.
+- If System Settings reports `电子邮件已达上限`, stop the batch after cancelling the uncompleted form. Treat it as a pause signal: retry only after manual verification and a delay. The list's `100 items` display is not proof of a hard account quota.
 - Numeric labels can be unreliable under some Chinese input methods in Apple web-style settings panels. Prefer ASCII letter labels such as `GPTA` to `GPTT` when the user does not require exact Apple-side labels.
 - The Feishu Base may still display separate user-facing labels; the important persisted field is the email address itself.
