@@ -43,6 +43,7 @@ export async function createHideMyEmailAliases({
   count = 20,
   prefix = "GPT",
   startIndex = 0,
+  delayMs = 0,
   app = "System Settings",
 } = {}) {
   if (!globalThis.sky) {
@@ -50,6 +51,9 @@ export async function createHideMyEmailAliases({
   }
   if (!Number.isInteger(count) || count < 1) {
     throw new Error("count must be a positive integer.");
+  }
+  if (!Number.isInteger(delayMs) || delayMs < 0) {
+    throw new Error("delayMs must be a non-negative integer.");
   }
 
   await closeCompletionPage(app);
@@ -68,7 +72,10 @@ export async function createHideMyEmailAliases({
 
     const completeTree = await getTree(app);
     if (completeTree.includes("电子邮件已达上限") || completeTree.includes("Email limit reached")) {
-      throw new Error("Hide My Email address limit reached. No alias was created.");
+      const limitError = new Error("Apple reported an address limit. The current alias was not created; pause and verify before retrying.");
+      limitError.created = [...created];
+      limitError.pendingLabel = label;
+      throw limitError;
     }
     if (!completeTree.includes("设置完成") && !completeTree.includes("Setup Complete")) {
       throw new Error(`Alias creation did not complete for ${label}.`);
@@ -79,6 +86,9 @@ export async function createHideMyEmailAliases({
     }
     created.push(confirmed);
     await globalThis.sky.click({ app, element_index: buttonIndex(completeTree, "完成") });
+    if (delayMs > 0 && index < count - 1) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
   }
   return created;
 }

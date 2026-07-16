@@ -32,17 +32,17 @@ if (!globalThis.sky) {
   await setupComputerUseRuntime({ globals: globalThis });
 }
 const { createHideMyEmailAliases } = await import("/Users/eryu/.codex/skills/apple-hide-my-email/scripts/create_hide_my_email_aliases.mjs");
-const aliases = await createHideMyEmailAliases({ count: 20, prefix: "GPT", startIndex: 0 });
+const aliases = await createHideMyEmailAliases({ count: 10, prefix: "GPT", startIndex: 0, delayMs: 3000 });
 nodeRepl.write(JSON.stringify(aliases));
 ```
 
-`startIndex` is zero-based and controls the letter suffix: `0` produces `GPTA`; `16` produces `GPTQ`. Choose an unused prefix or starting point before creating a new batch.
+`startIndex` is zero-based and controls the letter suffix: `0` produces `GPTA`; `16` produces `GPTQ`. Choose an unused prefix or starting point before creating a new batch. Use `delayMs` after a limit alert to avoid retrying a transient service throttle.
 
 The returned list is the source of truth for Feishu writeback. Each address is read again from the `设置完成` page before it is returned.
 
 ## Notes
 
 - The old Swift AX script remains only as a legacy diagnostic tool. Recent macOS System Settings panels accept the label value but can ignore its subsequent `继续` action when driven directly by AX; use the `.mjs` Computer Use path as the primary workflow.
-- If System Settings reports `电子邮件已达上限`, stop the batch after cancelling the uncompleted form. The current Apple account cannot create further aliases until Apple permits it.
+- If System Settings reports `电子邮件已达上限`, stop the batch after cancelling the uncompleted form and inspect the list total. The alert can be transient; a list showing `100 items` indicates the current Apple account has reached its total capacity.
 - Numeric labels can be unreliable under some Chinese input methods in Apple web-style settings panels. Prefer ASCII letter labels such as `GPTA` to `GPTT` when the user does not require exact Apple-side labels.
 - The Feishu Base may still display separate user-facing labels; the important persisted field is the email address itself.
