@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apple 隐私邮箱"
+  short_description: "批量创建 Apple 隐藏邮箱并追加到飞书邮箱字段"
+  default_prompt: "Use $apple-hide-my-email to create Apple Hide My Email aliases and append only their addresses to my Feishu Base."
