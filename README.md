@@ -42,8 +42,19 @@ bash install.sh core
 - `skills.sources.csv`：第三方或独立仓库的来源、分支和子目录。
 - `install.ps1` / `install.sh`：把选定 profile 安装到 `~/.codex/skills`。
 - `~/.cache/eryu-skills/repos`：外部仓库缓存，不进入 Git。
+- 清单的 `platform` 列用于跳过不适用当前系统的 Skill；省略或填写 `all` 表示跨平台。
 
 OMX、Codex 系统 Skill、飞书/Lark 插件、浏览器插件和带本机授权的连接器由各自安装器管理，不复制进本仓库。
+
+## 运行时兼容性
+
+强模型可以替代一部分“通用提示词脚手架”，但不能替代工具调用边界、私有工作流规则和第三方 API 参考。因而本仓库遵循三条原则：
+
+- 只把个人领域 Skill 和可验证的工具型 Skill 作为跨机器来源；不镜像系统、插件或连接器 Skill。
+- 不纳入要求调用其他平台不存在的 Skill 工具、覆盖系统指令或强制无条件 TDD / worktree / 计划确认的流程 Skill。
+- `core` 保持轻量；写作、幻灯片、设计、工具和媒体能力继续按 profile 按需安装。
+
+最近一次本地运行时审计与裁剪记录见 [`docs/skill-audit-2026-07-27.md`](docs/skill-audit-2026-07-27.md)。
 
 ## 更新
 
@@ -57,4 +68,4 @@ git pull --ff-only
 
 不要提交 API key、token、密码、OAuth 文件、cookie、私钥、`.env`、数据库、日志、浏览器状态和生成产物。个人 Skill 只保存读取私有上下文的规则，不保存私有正文和凭据。
 
-审计记录见 `docs/skill-audit-2026-07-15.md`。
+审计记录见 `docs/skill-audit-2026-07-15.md` 和 `docs/skill-audit-2026-07-27.md`。

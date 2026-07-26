@@ -18,6 +18,17 @@ selected() {
   [[ "$profile" == "all" || "$row_profile" == "core" || "$row_profile" == "$profile" ]]
 }
 
+platform_selected() {
+  local row_platform="${1:-all}"
+  case "$row_platform" in
+    ""|all) return 0 ;;
+    macos) [[ "$(uname -s)" == "Darwin" ]] ;;
+    linux) [[ "$(uname -s)" == "Linux" ]] ;;
+    windows) return 1 ;;
+    *) echo "Unknown source platform: $row_platform" >&2; exit 7 ;;
+  esac
+}
+
 copy_skill() {
   local source="$1"
   local target="$2"
@@ -38,9 +49,10 @@ copy_skill() {
 
 prepared_keys="|"
 
-while IFS=',' read -r name row_profile kind cache_key repo ref subpath; do
+while IFS=',' read -r name row_profile kind cache_key repo ref subpath row_platform; do
   [[ "$name" == "name" || -z "$name" ]] && continue
   selected "$row_profile" || continue
+  platform_selected "${row_platform:-all}" || continue
 
   if [[ "$kind" == "local" ]]; then
     source="$root/$subpath"

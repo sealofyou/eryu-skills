@@ -15,6 +15,17 @@ function Test-SelectedProfile([string]$RowProfile) {
     return $Profile -eq 'all' -or $RowProfile -eq 'core' -or $RowProfile -eq $Profile
 }
 
+function Test-SelectedPlatform([string]$RowPlatform) {
+    $platform = if ([string]::IsNullOrWhiteSpace($RowPlatform)) { 'all' } else { $RowPlatform.ToLowerInvariant() }
+    switch ($platform) {
+        'all' { return $true }
+        'windows' { return $env:OS -eq 'Windows_NT' }
+        'macos' { return $env:OS -ne 'Windows_NT' }
+        'linux' { return $false }
+        default { throw "Unknown source platform: $RowPlatform" }
+    }
+}
+
 function Copy-SkillTree([string]$Source, [string]$Target) {
     $targetFull = [IO.Path]::GetFullPath($Target)
     if (-not $targetFull.StartsWith($TargetRootFull, [StringComparison]::OrdinalIgnoreCase)) {
@@ -36,7 +47,7 @@ $Rows = Import-Csv -LiteralPath $Manifest
 $Prepared = @{}
 
 foreach ($row in $Rows) {
-    if (-not (Test-SelectedProfile $row.profile)) {
+    if (-not (Test-SelectedProfile $row.profile) -or -not (Test-SelectedPlatform $row.platform)) {
         continue
     }
 
