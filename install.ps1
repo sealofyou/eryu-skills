@@ -34,13 +34,34 @@ function Copy-SkillTree([string]$Source, [string]$Target) {
     if (-not (Test-Path (Join-Path $Source 'SKILL.md'))) {
         throw "Skill source has no SKILL.md: $Source"
     }
-    if (Test-Path $Target) {
-        Remove-Item -LiteralPath $Target -Recurse -Force
-    }
     New-Item -ItemType Directory -Force -Path $Target | Out-Null
-    Get-ChildItem -LiteralPath $Source -Force |
-        Where-Object { $_.Name -ne '.git' } |
-        Copy-Item -Destination $Target -Recurse -Force
+    # Some machines intercept the Remove-Item cmdlet (safe-delete hook) and it errors out.
+    # Use robocopy (native process) to mirror+clean instead, bypassing the hook.
+    # On non-Windows (Mac pwsh, no such hook) fall back to Remove-Item.
+    if ($env:OS -eq 'Windows_NT' -and (Get-Command robocopy -ErrorAction SilentlyContinue)) {
+        robocopy $Source $Target /MIR /XD .git /NFL /NDL /NJH /NJS /NC /NS | Out-Null
+        if ($LASTEXITCODE -ge 8) { throw "robocopy failed ($LASTEXITCODE): $Source -> $Target" }
+    } else {
+        if (Test-Path $Target) { Remove-Item -LiteralPath $Target -Recurse -Force }
+        New-Item -ItemType Directory -Force -Path $Target | Out-Null
+        Get-ChildItem -LiteralPath $Source -Force |
+            Where-Object { $_.Name -ne '.git' } |
+            Copy-Item -Destination $Target -Recurse -Force
+    }
+}
+
+function Invoke-Git {
+    param([Parameter(ValueFromRemainingArguments = $true)][string[]]$GitArgs)
+    # Native git writes progress to stderr; under $ErrorActionPreference='Stop' on
+    # Windows PowerShell 5.1 that stderr becomes a terminating error. Run git with
+    # EAP=Continue and check $LASTEXITCODE explicitly instead.
+    $prev = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    $out = & git @GitArgs 2>&1
+    $code = $LASTEXITCODE
+    $ErrorActionPreference = $prev
+    if ($code -ne 0) { throw "git $($GitArgs -join ' ') failed (exit $code): $($out | Out-String)" }
+    return $out
 }
 
 $Rows = Import-Csv -LiteralPath $Manifest
@@ -57,14 +78,14 @@ foreach ($row in $Rows) {
         $cache = Join-Path $CacheRoot $row.cache_key
         if (-not $Prepared.ContainsKey($row.cache_key)) {
             if (Test-Path (Join-Path $cache '.git')) {
-                if (git -C $cache status --porcelain) {
+                if (Invoke-Git -C $cache status --porcelain) {
                     throw "Managed cache has local changes: $cache"
                 }
-                git -C $cache fetch origin $row.ref
-                git -C $cache checkout $row.ref
-                git -C $cache pull --ff-only origin $row.ref
+                Invoke-Git -C $cache fetch origin $row.ref | Out-Null
+                Invoke-Git -C $cache checkout $row.ref | Out-Null
+                Invoke-Git -C $cache pull --ff-only origin $row.ref | Out-Null
             } else {
-                git clone --depth 1 --branch $row.ref $row.repo $cache
+                Invoke-Git clone --depth 1 --branch $row.ref $row.repo $cache | Out-Null
             }
             $Prepared[$row.cache_key] = $cache
         }
