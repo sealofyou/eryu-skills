@@ -1,0 +1,55 @@
+schema_version: 1
+project:
+  id: "{{PROJECT_ID}}"
+  title: "{{TITLE}}"
+  slug: "{{SLUG}}"
+  platform: "{{PLATFORM}}"
+  mode: "{{MODE}}"
+  review_mode: "{{REVIEW_MODE}}"
+  status: "active"
+  current_stage: "route"
+content:
+  type: ""
+  audience: ""
+  core_judgment: ""
+  hook: ""
+  duration_target_seconds: {{DURATION_TARGET_SECONDS}}
+  aspect_ratio: "{{ASPECT_RATIO}}"
+  version: "draft-v1"
+locks:
+  route: "pending"
+  facts: "pending"
+  script: "pending"
+  visual: "pending"
+  voice: "pending"
+  render: "pending"
+  publish: "pending"
+review:
+  waiting_for_user: false
+  checkpoint: ""
+  questions: []
+cost:
+  paid_action_authorized: false
+  estimate: ""
+  actual: ""
+artifacts:
+  fact_card: "fact-card.md"
+  content_plan: "content-plan.md"
+  speaker_notes: "speaker-notes.md"
+  review_board: "review-board.md"
+  verification: "verification.md"
+  html: ""
+  audio: ""
+  subtitle: ""
+  video: ""
+  cover: ""
+  publish_copy: "publish-copy.md"
+publish:
+  authorized: false
+  account: ""
+  status: "assets_ready"
+  public_url: ""
+next_action:
+  owner: "agent"
+  description: "完成路线卡"
+updated_at: "{{CREATED_AT}}"

@@ -1,5 +1,6 @@
 name,profile,kind,cache_key,repo,ref,subpath
 eryu-share-studio,core,local,eryu-skills,,,skills/eryu-share-studio
+eryu-short-video-studio,core,local,eryu-skills,,,skills/eryu-short-video-studio
 eryu-dynamic-web-publisher,core,local,eryu-skills,,,skills/eryu-dynamic-web-publisher
 dida-feishu-light-sync,core,local,eryu-skills,,,skills/dida-feishu-light-sync
 github-kb,core,local,eryu-skills,,,skills/github-kb
