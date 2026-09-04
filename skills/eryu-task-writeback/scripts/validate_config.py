@@ -39,7 +39,7 @@ def main() -> int:
         return 1
 
     try:
-        data = json.loads(args.config.read_text(encoding="utf-8"))
+        data = json.loads(args.config.read_text(encoding="utf-8-sig"))
     except (OSError, json.JSONDecodeError) as exc:
         result["errors"] = [f"cannot parse config: {exc.__class__.__name__}"]
         print(json.dumps(result, ensure_ascii=True, indent=2))
