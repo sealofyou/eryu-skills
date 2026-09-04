@@ -1,0 +1,29 @@
+{
+  "skill_name": "eryu-task-writeback",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "同一个 Codex 任务换了一个 session 继续修同一份交付包，飞书里已经有 record_id。应该怎么回写？",
+      "expected_output": "更新已有 record_id，不新建任务；写真实新入口和阶段进展。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "旧的 0708 平台化任务已经完成，现在开始有独立数据、门禁和复盘的 Lv1.7.6 实验。",
+      "expected_output": "完成旧任务并清空执行状态；为独立版本实验新建任务，填写父任务与真实入口。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "我已经把任务状态改成已完成，但它还显示在执行中看板。",
+      "expected_output": "读取目标行后成组写入已完成、执行状态 null、完成时间和最终证据，并回读看板。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "laptop 能 SSH 到 Mac，但当前 Codex 工具读不到 Mac 的 task。Mac 那边应该还在做。",
+      "expected_output": "不猜远端完成；保留最后有证据状态，让 Mac 任务自写或 Mac 本机 Heartbeat 补漏。",
+      "files": []
+    }
+  ]
+}

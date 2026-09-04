@@ -26,7 +26,7 @@ bash install.sh core
 
 | Profile | 内容 |
 | --- | --- |
-| `core` | 尔玉分享工坊、动态网页路由、滴答飞书轻量巡检、GitHub 知识库、Frontend Slides |
+| `core` | 尔玉分享工坊、动态网页路由、滴答飞书轻量巡检、任务状态回写、GitHub 知识库、Frontend Slides |
 | `content` | 写作、思维挖掘、配图、课程、视频笔记和批量生图 |
 | `slides` | gpt-image2-ppt 与 Guizang 专项路线 |
 | `design` | UI/UX Pro Max |
@@ -53,6 +53,8 @@ OMX、Codex 系统 Skill、飞书/Lark 插件、浏览器插件和带本机授�
 - 只把个人领域 Skill 和可验证的工具型 Skill 作为跨机器来源；不镜像系统、插件或连接器 Skill。
 - 不纳入要求调用其他平台不存在的 Skill 工具、覆盖系统指令或强制无条件 TDD / worktree / 计划确认的流程 Skill。
 - `core` 保持轻量；写作、幻灯片、设计、工具和媒体能力继续按 profile 按需安装。
+
+`eryu-task-writeback` 固定飞书 Base 同一任务行的开始、阶段、等待、暂停、待验收和完成回写。跨机器补漏仍要求每台机器运行自己的本机 Heartbeat；SSH 可用于安装与核验，不能代替远端 Codex task 状态证据。
 
 最近一次本地运行时审计与裁剪记录见 [`docs/skill-audit-2026-07-27.md`](docs/skill-audit-2026-07-27.md)。
 
