@@ -1,0 +1,4 @@
+interface:
+  display_name: "尔玉短视频工坊"
+  short_description: "把选题一路推进为可审核、可发布、可复用的竖屏短视频"
+  default_prompt: "使用 $eryu-short-video-studio 把这份素材做成一条可审核、可发布的抖音竖屏短视频。"
