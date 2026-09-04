@@ -8,11 +8,14 @@
   "eryuos_root": "本机 eryuOS 绝对路径",
   "base_token": "本机受控资源 ID",
   "table_id": "本机受控资源 ID",
-  "identity": "user"
+  "identity": "user",
+  "profile": "可选的 lark-cli Profile"
 }
 ```
 
 配置只保存资源定位，不保存飞书 access token、app secret 或密码。
+
+`profile` 为空时不传 `--profile`；非空时每条命令都显式传入。普通本地操作先清除 `HERMES_HOME / OPENCLAW_HOME / LARK_CHANNEL`，不要让环境变量把命令切到 Hermes 的隔离工作区。
 
 ## 字段矩阵
 
@@ -32,9 +35,9 @@
 命令参数来自本机 ignored 配置。示例不包含真实资源 ID。
 
 ```text
-lark-cli base +record-get --base-token <base> --table-id <table> --record-id <record> --as user --format json
-lark-cli base +record-upsert --base-token <base> --table-id <table> --record-id <record> --as user --json <field-map>
-lark-cli base +record-get --base-token <base> --table-id <table> --record-id <record> --as user --format json
+lark-cli base +record-get --base-token <base> --table-id <table> --record-id <record> --as user [--profile <profile>] --format json
+lark-cli base +record-upsert --base-token <base> --table-id <table> --record-id <record> --as user [--profile <profile>] --json <field-map>
+lark-cli base +record-get --base-token <base> --table-id <table> --record-id <record> --as user [--profile <profile>] --format json
 ```
 
 `+record-upsert` 不会按任务名自动去重。不带 `--record-id` 一定创建新行，因此创建前必须先查重。

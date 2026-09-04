@@ -24,6 +24,12 @@
       "prompt": "laptop 能 SSH 到 Mac，但当前 Codex 工具读不到 Mac 的 task。Mac 那边应该还在做。",
       "expected_output": "不猜远端完成；保留最后有证据状态，让 Mac 任务自写或 Mac 本机 Heartbeat 补漏。",
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "main-win 的 lark-cli 默认返回 token_missing，但普通工作区里已经有 feishu-personal Profile。",
+      "expected_output": "先清除 Hermes 工作区环境变量，并按本机配置显式传 --profile feishu-personal；不要求重复授权。",
+      "files": []
     }
   ]
 }

@@ -107,6 +107,8 @@ compatibility: Requires lark-cli for Feishu Base writes. Cross-machine reconcili
 ## 写入步骤
 
 1. 先用当前机器的 `lark-cli` user 身份读取目标记录和真实字段。
+   - 本机配置存在 `profile` 时，每条命令显式传 `--profile <name>`。
+   - 普通任务回写子进程先清除 `HERMES_HOME / OPENCLAW_HOME / LARK_CHANNEL`，避免误进 Hermes 隔离配置空间。
 2. 更新前保留未要求修改的字段；不要整行覆盖。
 3. 使用 `base +record-upsert --record-id` 更新已知记录。
 4. 只有确认新任务时，不带 `--record-id` 创建。

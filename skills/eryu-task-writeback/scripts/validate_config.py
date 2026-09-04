@@ -29,6 +29,7 @@ def main() -> int:
         "base_token_present": False,
         "table_id_present": False,
         "identity": None,
+        "profile": None,
         "errors": [],
     }
 
@@ -50,6 +51,7 @@ def main() -> int:
     base_token = data.get("base_token")
     table_id = data.get("table_id")
     identity = data.get("identity", "user")
+    profile = data.get("profile")
 
     if machine_id not in MACHINES:
         errors.append("machine_id must be laptop-win, main-win, or macbook")
@@ -61,6 +63,8 @@ def main() -> int:
         errors.append("table_id is missing or malformed")
     if identity != "user":
         errors.append("identity must be user")
+    if profile is not None and (not isinstance(profile, str) or not profile.strip()):
+        errors.append("profile must be omitted or a non-empty string")
 
     result.update(
         {
@@ -71,6 +75,7 @@ def main() -> int:
             "base_token_present": isinstance(base_token, str) and bool(base_token.strip()),
             "table_id_present": isinstance(table_id, str) and table_id.startswith("tbl"),
             "identity": identity,
+            "profile": profile.strip() if isinstance(profile, str) else None,
             "errors": errors,
         }
     )
