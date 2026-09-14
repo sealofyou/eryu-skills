@@ -28,7 +28,7 @@ bash install.sh core
 | --- | --- |
 | `core` | 尔玉分享工坊、尔玉短视频工坊、动态网页路由、滴答飞书轻量巡检、任务状态回写、Codex 指定模型子 Agent 路由、GitHub 知识库、Frontend Slides |
 | `content` | 写作、思维挖掘、配图、课程、视频笔记和批量生图 |
-| `slides` | gpt-image2-ppt 与 Guizang 专项路线 |
+| `slides` | 历史 profile；两个原来源已停用，当前仅安装 core |
 | `design` | UI/UX Pro Max |
 | `tools` | Harness、ModelScope 等工程工具 |
 | `media` | 剪映自动化 Skill |
@@ -74,3 +74,7 @@ git pull --ff-only
 
 
 `eryu-codex-subagent-router` 原名 `model-subagent-router`，现明确面向 Codex 主控。已有旧版的机器升级时，确认没有本机自改后移除旧名称的安装目录，避免重复发现；不把本机重命名当成其他机器已迁移。
+
+## 2026-09-14 触发与分工整理
+
+自有 core 的描述已收窄；子 Agent 路由支持明确要求的 Grok 执行、GPT 审核，Codex CLI 细节按需读取。不同平台的官方插件与私有项目 Skill 由各自来源管理，不复制入公开仓。已停用来源仍在 `skills.sources.disabled.csv` 留档。

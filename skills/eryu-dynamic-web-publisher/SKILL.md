@@ -1,6 +1,6 @@
 ---
 name: eryu-dynamic-web-publisher
-description: 当用户要按尔玉风格制作普通响应式网页、个人主页或产品页原型、动态 HTML 演示、网页式报告、可打印 PDF，或需要在 site、deck、report 三种输出之间选择时使用。
+description: 按尔玉品牌制作响应式网页、动态演示或网页报告时使用；幻灯片转分享工坊。
 ---
 
 # 尔玉动态网页发布

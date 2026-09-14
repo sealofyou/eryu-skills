@@ -1,6 +1,6 @@
 ---
 name: eryu-share-studio
-description: 当用户要制作分享、演讲、课程、项目复盘、HTML PPT、动态网页演示，或把 Markdown、资料和个人经历转换为符合尔玉个人品牌的单文件 HTML 与 PDF 时使用。
+description: 制作符合尔玉品牌的分享、演讲或课程 HTML 演示与 PDF 时使用。
 ---
 
 # 尔玉分享工坊

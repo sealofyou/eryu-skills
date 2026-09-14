@@ -1,10 +1,11 @@
 ---
 name: eryu-task-writeback
-description: 当 Codex 开始、继续、分阶段推进、暂停、等待用户、交付或完成真实任务时，必须使用本 Skill 将状态写回尔玉唯一的飞书 Base 任务行；也用于半小时补漏、跨机器任务接力、用户说“这个做完了/暂停”、执行状态残留、独立新任务未入账或怀疑重复建行。即使用户没有说“同步飞书”，只要工作会产生交付物、跨步骤推进或稍后继续，也应触发。一次性问答和没有行动承诺的讨论不触发。
-compatibility: Requires lark-cli for Feishu Base writes. Cross-machine reconciliation requires a local Codex heartbeat on each machine.
+description: 执行真实任务时，必须将开始、进展、暂停和完成回写飞书 Base 同一任务行；一次性问答不触发。
 ---
 
 # 尔玉任务状态回写
+
+运行需要 lark-cli；跨机器任务状态核对应由每台机器自己的 Codex Heartbeat 完成。
 
 ## 目的
 

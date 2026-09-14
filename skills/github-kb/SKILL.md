@@ -1,6 +1,6 @@
 ---
 name: github-kb
-description: 当用户提到 GitHub、仓库、repo、克隆项目、查找本地代码库、查看 issue 或 PR，或需要维护跨机器 GitHub 仓库索引时使用。
+description: 定位、下载或维护 GitHub 仓库及本机仓库索引，或查阅 issue、PR 时使用。
 ---
 
 # GitHub 知识库
